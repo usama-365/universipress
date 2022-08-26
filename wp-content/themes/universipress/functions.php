@@ -8,4 +8,9 @@ function load_custom_files() {
     wp_enqueue_script("universipress_main_js", get_theme_file_uri("build/index.js"), array('jquery'), '1.0', true);
 }
 
+function load_custom_features() {
+    add_theme_support('title-tag');
+}
+
 add_action('wp_enqueue_scripts', 'load_custom_files');
+add_action('after_setup_theme', 'load_custom_features');
