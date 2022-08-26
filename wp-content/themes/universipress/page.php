@@ -21,23 +21,38 @@ while (have_posts()) {
             ?>
             <div class="metabox metabox--position-up metabox--with-home-link">
                 <p>
-                    <a class="metabox__blog-home-link" href="<?php echo get_the_permalink($parent_id) ?>"><i class="fa fa-home" aria-hidden="true"></i> Back to
-                        <?php echo get_the_title($parent_id) ?></a> <span class="metabox__main"><?php the_title() ?></span>
+                    <a class="metabox__blog-home-link" href="<?php echo get_the_permalink($parent_id) ?>"><i
+                                class="fa fa-home" aria-hidden="true"></i> Back to
+                        <?php echo get_the_title($parent_id) ?></a> <span
+                            class="metabox__main"><?php the_title() ?></span>
                 </p>
             </div>
             <?php
         }
-        ?>
 
-        <!--
-        <div class="page-links">
-            <h2 class="page-links__title"><a href="#">About Us</a></h2>
-            <ul class="min-list">
-                <li class="current_page_item"><a href="#">Our History</a></li>
-                <li><a href="#">Our Goals</a></li>
-            </ul>
-        </div>
-        -->
+        $children_page_ids = get_pages([
+           'child_of' => get_the_ID()
+        ]);
+        if ($parent_id || $children_page_ids) { ?>
+            <div class="page-links">
+                <h2 class="page-links__title"><a
+                            href="<?php get_the_permalink($parent_id) ?>"><?php echo get_the_title($parent_id) ?></a>
+                </h2>
+                <ul class="min-list">
+                    <?php
+                    $top_parent_id = get_the_ID();
+                    if ($parent_id) {
+                        $top_parent_id = $parent_id;
+                    }
+                    wp_list_pages([
+                        'title_li' => null,
+                        'child_of' => $top_parent_id
+                    ]) ?>
+                </ul>
+            </div>
+            <?php
+        }
+        ?>
 
         <div class="generic-content">
             <?php the_content(); ?>
