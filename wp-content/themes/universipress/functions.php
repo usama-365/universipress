@@ -1,6 +1,7 @@
 <?php
 
-function load_custom_files() {
+function load_custom_files()
+{
     wp_enqueue_style("universipress_main_css", get_theme_file_uri("build/style-index.css"));
     wp_enqueue_style("universipress_extra_css", get_theme_file_uri("build/index.css"));
     wp_enqueue_style("font_awesome", "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
@@ -8,7 +9,11 @@ function load_custom_files() {
     wp_enqueue_script("universipress_main_js", get_theme_file_uri("build/index.js"), array('jquery'), '1.0', true);
 }
 
-function load_custom_features() {
+function load_custom_features()
+{
+    register_nav_menu('headerMenuLocation', 'Header Menu Location');
+    register_nav_menu('footerLocation1', 'Footer Location 1');
+    register_nav_menu('footerLocation2', 'Footer Location 2');
     add_theme_support('title-tag');
 }
 
